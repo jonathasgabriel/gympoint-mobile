@@ -6,23 +6,21 @@ import api from '~/services/api';
 
 export function* signIn({ payload }) {
   try {
-    const { email, password } = payload;
+    const { id } = payload;
 
-    const response = yield call(api.post, 'sessions', {
-      email,
-      password,
+    const response = yield call(api.post, 'students/checkid', {
+      id,
     });
 
-    const { token, user } = response.data;
+    const { valid } = response.data;
 
-    if (user.provider) {
-      Alert.alert('Log in error', 'User can not be a provider');
+    if (!valid) {
+      Alert.alert('Log in error', 'Student does not exist');
+      yield put(signFailure());
       return;
     }
 
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-
-    yield put(signInSuccess(token, user));
+    yield put(signInSuccess(id));
   } catch (err) {
     Alert.alert(
       'Authentication failed',
@@ -32,17 +30,4 @@ export function* signIn({ payload }) {
   }
 }
 
-export function setToken({ payload }) {
-  if (!payload) return;
-
-  const { token } = payload.auth;
-
-  if (token) {
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-  }
-}
-
-export default all([
-  takeLatest('persist/REHYDRATE', setToken),
-  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
-]);
+export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);

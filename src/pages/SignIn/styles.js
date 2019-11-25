@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
-import Input from '~/components/Input';
 import Button from '~/components/Button';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -19,20 +18,16 @@ export const Form = styled.View`
   margin-top: 50px;
 `;
 
-export const FormInput = styled(Input)`
-  margin-bottom: 10px;
-`;
-
 export const SubmitButton = styled(Button)`
   margin-top: 5px;
 `;
 
-export const SignLink = styled.TouchableOpacity`
-  margin-top: 20px;
-`;
-
-export const SignLinkText = styled.Text`
-  color: #fff;
-  font-weight: bold;
+export const TextInput = styled.TextInput`
+  margin-bottom: 10px;
+  padding: 0 15px;
+  height: 45px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  color: #999999;
   font-size: 16px;
 `;
