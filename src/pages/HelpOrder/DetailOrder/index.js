@@ -3,6 +3,6 @@ import { View } from 'react-native';
 
 // import { Container } from './styles';
 
-export default function HelpOrder() {
+export default function DetailOrder() {
   return <View />;
 }
