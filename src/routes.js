@@ -29,8 +29,7 @@ export default (signedIn = false) =>
                 },
                 {
                   defaultNavigationOptions: {
-                    headerTransparent: true,
-                    headerTintColor: '#fff',
+                    headerTransparent: false,
                     headerLeftContainerStyle: {
                       marginLeft: 20,
                     },
@@ -40,12 +39,8 @@ export default (signedIn = false) =>
               navigationOptions: {
                 tabBarVisible: true,
                 tabBarLabel: 'Help Order',
-                tabBarIcon: (
-                  <Icon
-                    name="add-circle-outline"
-                    size={20}
-                    color="rgba(255, 255, 255, 0.6)"
-                  />
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="live-help" size={20} color={tintColor} />
                 ),
               },
             },

@@ -17,7 +17,7 @@ import {
   CheckinDate,
 } from './styles';
 
-export default function ListOrder() {
+export default function CheckIn() {
   const [checkins, setCheckins] = useState([]);
 
   const studentId = useSelector(state => state.user.user);
@@ -81,7 +81,7 @@ export default function ListOrder() {
   );
 }
 
-ListOrder.navigationOptions = {
+CheckIn.navigationOptions = {
   tabBarLabel: 'Check-ins',
   tabBarIcon: ({ tintColor }) => (
     <Icon name="pin-drop" size={20} color={tintColor} />
