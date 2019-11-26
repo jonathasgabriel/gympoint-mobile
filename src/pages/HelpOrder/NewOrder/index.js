@@ -1,8 +1,57 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import headerLogo from '~/assets/headerLogo.png';
 
-// import { Container } from './styles';
+import Background from '~/components/Background';
 
-export default function NewOrder() {
-  return <View />;
+import api from '~/services/api';
+
+import { Container, SubmitButton, QuestionInput } from './styles';
+
+export default function NewOrder({ navigation }) {
+  const [question, setQuestion] = useState([]);
+
+  const studentId = useSelector(state => state.user.user);
+
+  async function handleSubmitNewHelpOrder() {
+    await api.post(`/students/${studentId}/help-orders`, {
+      question,
+    });
+    navigation.navigate('ListOrder');
+  }
+
+  return (
+    <Background>
+      <Container>
+        <QuestionInput
+          multiline
+          placeholder="Please type your help order"
+          placeholderTextColor="#999999"
+          onChangeText={e => setQuestion(e)}
+        />
+        <SubmitButton
+          onPress={() => {
+            handleSubmitNewHelpOrder();
+          }}
+        >
+          Submit help order
+        </SubmitButton>
+      </Container>
+    </Background>
+  );
 }
+
+NewOrder.navigationOptions = ({ navigation }) => ({
+  headerTitle: <Image source={headerLogo} />,
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.goBack();
+      }}
+    >
+      <Icon name="chevron-left" size={20} color="#000000" />
+    </TouchableOpacity>
+  ),
+});

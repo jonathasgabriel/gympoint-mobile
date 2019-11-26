@@ -9,6 +9,7 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   align-items: center;
   padding: 0 30px;
 `;
+
 export const QuestionHeader = styled.View`
   flex-direction: row;
   justify-content: space-between;

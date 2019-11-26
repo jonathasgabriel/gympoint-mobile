@@ -4,6 +4,7 @@ import { parseISO, formatRelative } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { withNavigationFocus } from 'react-navigation';
 import headerLogo from '~/assets/headerLogo.png';
 
 import Background from '~/components/Background';
@@ -22,7 +23,7 @@ import {
   HelpOrderReadText,
 } from './styles';
 
-export default function ListOrder({ navigation }) {
+function ListOrder({ navigation, isFocused }) {
   const [helpOrders, setHelpOrders] = useState([]);
 
   const studentId = useSelector(state => state.user.user);
@@ -44,9 +45,12 @@ export default function ListOrder({ navigation }) {
   }
 
   useEffect(() => {
-    loadHelpOrders();
+    if (isFocused) {
+      loadHelpOrders();
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isFocused]);
 
   async function handleRequestNewHelpOrder() {
     navigation.navigate('NewOrder');
@@ -94,3 +98,5 @@ export default function ListOrder({ navigation }) {
 ListOrder.navigationOptions = {
   headerTitle: <Image source={headerLogo} />,
 };
+
+export default withNavigationFocus(ListOrder);
