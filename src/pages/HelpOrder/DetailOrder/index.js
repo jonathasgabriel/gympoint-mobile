@@ -1,8 +1,50 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import headerLogo from '~/assets/headerLogo.png';
 
-// import { Container } from './styles';
+import Background from '~/components/Background';
 
-export default function DetailOrder() {
-  return <View />;
+import {
+  Container,
+  QuestionHeader,
+  TitleText,
+  QuestionTime,
+  MainText,
+  InfoWrapper,
+} from './styles';
+
+export default function DetailOrder({ navigation }) {
+  const helpOrder = navigation.getParam('item');
+
+  return (
+    <Background>
+      <Container>
+        <InfoWrapper>
+          <QuestionHeader>
+            <TitleText>QUESTION</TitleText>
+            <QuestionTime>{helpOrder.formattedDate}</QuestionTime>
+          </QuestionHeader>
+          <MainText>{helpOrder.question}</MainText>
+          <TitleText marginTop={20}>ANSWER</TitleText>
+          <MainText>
+            {helpOrder.answer ? helpOrder.answer : 'Not answered yet'}
+          </MainText>
+        </InfoWrapper>
+      </Container>
+    </Background>
+  );
 }
+
+DetailOrder.navigationOptions = ({ navigation }) => ({
+  headerTitle: <Image source={headerLogo} />,
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.goBack();
+      }}
+    >
+      <Icon name="chevron-left" size={20} color="#000000" />
+    </TouchableOpacity>
+  ),
+});

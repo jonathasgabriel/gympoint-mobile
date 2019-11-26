@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+
 import Button from '~/components/Button';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -22,7 +24,7 @@ export const HelpOrderList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })``;
 
-export const HelpOrder = styled.View`
+export const HelpOrder = styled(RectButton)`
   flex-direction: column;
   margin-top: 15px;
   border-radius: 4px;
@@ -45,6 +47,7 @@ export const HelpOrderText = styled.Text.attrs({
   margin-top: 15px;
   font-size: 14px;
   color: #666666;
+  line-height: 20;
 `;
 
 export const HelpOrderInfo = styled.View`

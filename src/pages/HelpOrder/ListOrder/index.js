@@ -66,7 +66,9 @@ export default function ListOrder({ navigation }) {
           data={helpOrders}
           keyExtractor={item => item._id}
           renderItem={({ item }) => (
-            <HelpOrder onPress={() => {}}>
+            <HelpOrder
+              onPress={() => navigation.navigate('DetailOrder', { item })}
+            >
               <HelpOrderHeader>
                 <HelpOrderInfo>
                   <Icon
