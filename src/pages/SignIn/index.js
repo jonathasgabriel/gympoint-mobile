@@ -8,7 +8,7 @@ import { signInRequest } from '~/store/modules/auth/actions';
 
 import { Container, Form, SubmitButton, TextInput } from './styles';
 
-export default function SignIn({ navigation }) {
+export default function SignIn() {
   const dispatch = useDispatch();
 
   const [enrollmentId, setEnrollmentId] = useState('');

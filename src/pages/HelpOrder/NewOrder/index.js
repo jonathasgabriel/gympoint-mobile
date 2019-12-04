@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity, Image } from 'react-native';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import headerLogo from '~/assets/headerLogo.png';
 
@@ -27,7 +28,7 @@ export default function NewOrder({ navigation }) {
       <Container>
         <QuestionInput
           multiline
-          placeholder="Please type your help order"
+          placeholder="Please type your question"
           placeholderTextColor="#999999"
           onChangeText={e => setQuestion(e)}
         />
@@ -55,3 +56,9 @@ NewOrder.navigationOptions = ({ navigation }) => ({
     </TouchableOpacity>
   ),
 });
+
+NewOrder.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

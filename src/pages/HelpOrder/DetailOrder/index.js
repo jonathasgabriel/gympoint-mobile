@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import headerLogo from '~/assets/headerLogo.png';
 
@@ -48,3 +49,10 @@ DetailOrder.navigationOptions = ({ navigation }) => ({
     </TouchableOpacity>
   ),
 });
+
+DetailOrder.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
+};

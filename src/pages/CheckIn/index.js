@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Alert } from 'react-native';
 import { parseISO, formatRelative } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -51,8 +52,12 @@ export default function CheckIn() {
   }, []);
 
   async function handleSubmitCheckin() {
-    await api.post(`/students/${studentId}/checkins`);
-    loadCheckins();
+    try {
+      await api.post(`/students/${studentId}/checkins`);
+      loadCheckins();
+    } catch (err) {
+      Alert.alert('Checkin not available');
+    }
   }
 
   return (

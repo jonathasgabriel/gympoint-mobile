@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { parseISO, formatRelative } from 'date-fns';
+import PropTypes from 'prop-types';
 import enUS from 'date-fns/locale/en-US';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -100,3 +101,10 @@ ListOrder.navigationOptions = {
 };
 
 export default withNavigationFocus(ListOrder);
+
+ListOrder.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  isFocused: PropTypes.bool.isRequired,
+};
